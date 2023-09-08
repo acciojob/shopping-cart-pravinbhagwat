@@ -1,16 +1,36 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="./styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Shopping List</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
-
+    <h1>Shopping List</h1>
+    <div class="input-container">
+        <label for="item-name-input">Item Name:</label>
+        <input type="text" id="item-name-input" aria-labelledby="item-name-label" required>
+        <label for="item-price-input">Item Price:</label>
+        <input type="number" id="item-price-input" aria-labelledby="item-price-label" required>
+        <button id="add">Add</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th aria-label="Item Name" id="item">Item Name</th>
+                <th aria-label="Item Price" id="price">Item Price</th>
+            </tr>
+        </thead>
+        <tbody id="shopping-list">
+            <!-- Initially, the table should have only one row with grand total as 0 -->
+            <tr>
+                <td colspan="2" aria-live="polite">
+                    <strong>Grand Total:</strong> <span id="total">0</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="script.js"></script>
 </body>
-
 </html>

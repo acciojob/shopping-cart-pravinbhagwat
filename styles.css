@@ -1,2 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
 
-/* Your CSS Code here. */
+h1 {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+}
+
+.input-container {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+label, input, button {
+    margin: 5px;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #333;
+}
+
+th, td {
+    padding: 10px;
+}
+
+#total {
+    font-weight: bold;
+}
+
