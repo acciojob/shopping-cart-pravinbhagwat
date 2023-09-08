@@ -1,47 +1,38 @@
 document.addEventListener('DOMContentLoaded', function () {
     const itemNameInput = document.getElementById('item-name-input');
     const itemPriceInput = document.getElementById('item-price-input');
+    const itemQtyInput = document.getElementById('item-qty-input'); // Added quantity input
     const addButton = document.getElementById('add');
     const shoppingList = document.getElementById('shopping-list');
-    const totalElement = document.getElementById('total');
+    const totalDisplay = document.getElementById('total');
 
     addButton.addEventListener('click', function () {
         const itemName = itemNameInput.value.trim();
         const itemPrice = parseFloat(itemPriceInput.value);
+        const itemQty = parseInt(itemQtyInput.value); // Parse quantity as an integer
 
-        if (itemName === '' || isNaN(itemPrice) || itemPrice <= 0) {
-            alert('Please enter a valid item name and price.');
+        if (itemName === '' || isNaN(itemPrice) || itemPrice <= 0 || isNaN(itemQty) || itemQty <= 0) {
+            alert('Please enter a valid item name, price, and quantity.');
             return;
         }
 
+        // Create a new row in the shopping list table
         const newRow = document.createElement('tr');
-        const itemNameCell = document.createElement('td');
-        const itemPriceCell = document.createElement('td');
-
-        itemNameCell.textContent = itemName;
-        itemPriceCell.textContent = itemPrice.toFixed(2);
-
-        newRow.appendChild(itemNameCell);
-        newRow.appendChild(itemPriceCell);
+        newRow.innerHTML = `
+            <td>${itemName}</td>
+            <td>${itemQty}</td>
+            <td>$${(itemPrice * itemQty).toFixed(2)}</td>
+        `;
         shoppingList.appendChild(newRow);
 
         // Clear input fields
         itemNameInput.value = '';
         itemPriceInput.value = '';
+        itemQtyInput.value = '';
 
-        // Update the grand total
-        updateTotal();
+        // Calculate and update the total
+        const currentTotal = parseFloat(totalDisplay.textContent.match(/\d+(\.\d+)?/)[0]);
+        const newTotal = currentTotal + itemPrice * itemQty;
+        totalDisplay.textContent = `Grand Total: $${newTotal.toFixed(2)}`;
     });
-
-    function updateTotal() {
-        const rows = shoppingList.querySelectorAll('tr');
-        let grandTotal = 0;
-
-        for (let i = 1; i < rows.length; i++) {
-            const priceCell = rows[i].querySelector('td:nth-child(2)');
-            grandTotal += parseFloat(priceCell.textContent);
-        }
-
-        totalElement.textContent = grandTotal.toFixed(2);
-    }
 });
